@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbiotic Enterprise Localization System — Duygu TAŞ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="gallery-shell">
+      <section id="scene-a" class="scene is-active" aria-label="Landing">
+        <div class="center-stack">
+          <button id="grab-ticket" class="btn-primary">Grab your ticket</button>
+          <p class="micro-copy">Symbiotic Enterprise Localization System</p>
+          <p class="micro-copy">by Duygu TAŞ</p>
+        </div>
+      </section>
+
+      <section id="scene-b" class="scene" aria-label="Ticket">
+        <article class="ticket-card" role="article" aria-label="Museum ticket">
+          <header class="ticket-band">
+            <span>☆ ☆</span>
+            <h1>ADMIT ONE</h1>
+            <span>☆ ☆</span>
+          </header>
+          <div class="ticket-body">
+            <div>
+              <p class="ticket-title">Symbiotic Enterprise Localization System</p>
+              <p class="ticket-meta">EN→TR | EN→IT</p>
+              <p class="ticket-meta">Curated by Duygu TAŞ</p>
+            </div>
+            <div class="barcode" aria-hidden="true"></div>
+          </div>
+          <footer class="ticket-footer">
+            <p>Ticket attached</p>
+            <a class="btn-ghost" href="assets/ticket.pdf" download>Download ticket (PDF)</a>
+          </footer>
+        </article>
+        <button id="enter-gallery" class="btn-primary">Enter the Gallery</button>
+      </section>
+
+      <section id="scene-c" class="scene" aria-label="Gallery doors">
+        <div class="doors" aria-hidden="true">
+          <div class="door door-left"></div>
+          <div class="door door-right"></div>
+        </div>
+        <div class="revealed-headline">
+          <p>Symbiotic Enterprise Localization System</p>
+        </div>
+      </section>
+
+      <section id="scene-d" class="scene" aria-label="Intro typing">
+        <div class="intro-copy">
+          <p id="typed-line" class="typed"></p>
+          <p id="intro-title" class="intro-title hidden">Symbiotic Enterprise Localization System</p>
+          <p id="intro-byline" class="intro-byline hidden">by Duygu TAŞ</p>
+        </div>
+      </section>
+
+      <section id="scene-e" class="scene" aria-label="Exhibition wall">
+        <div class="exhibit-grid">
+          <article class="exhibit">
+            <header><h2>I. Philosophy</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>Humans and AI collaborate with clear role boundaries.</li>
+              <li>AI accelerates throughput; humans own nuance and accountability.</li>
+              <li>Quality is treated as a strategic business signal, not a final step.</li>
+            </ul>
+          </article>
+
+          <article class="exhibit">
+            <header><h2>II. Context Engineering</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>Onboarding packs codify audience, tone, product, and legal constraints.</li>
+              <li>EN→TR and EN→IT risk maps are set before first delivery cycle.</li>
+              <li>Context is versioned so AI prompts and reviewers stay aligned.</li>
+            </ul>
+          </article>
+
+          <article class="exhibit">
+            <header><h2>III. Human + AI Workflow</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>Intake → prep → AI-assisted drafting → human QA → delivery loop.</li>
+              <li>Glossary and TM governance enforce stable language memory.</li>
+              <li>Approval paths are explicit for legal and brand-critical decisions.</li>
+            </ul>
+          </article>
+
+          <article class="exhibit">
+            <header><h2>IV. Clarification Intelligence</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>EN→IT: formality and gender agreement escalated via blocker rules.</li>
+              <li>EN→TR: tone calibration and terminology consistency monitored weekly.</li>
+              <li>Question batching reduces decision fatigue while preserving SLA speed.</li>
+            </ul>
+          </article>
+
+          <article class="exhibit">
+            <header><h2>V. Enterprise Metrics</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>OTD, QA pass rate, rework trend, TAT, and risk exposure tracked monthly.</li>
+              <li>Signals tie linguistic quality directly to operational predictability.</li>
+              <li>Business review format enables stakeholder-grade reporting.</li>
+            </ul>
+          </article>
+
+          <article class="exhibit">
+            <header><h2>VI. 30-60-90 Plan</h2><button class="toggle-exhibit" aria-expanded="false">Open exhibit</button></header>
+            <ul>
+              <li>30: baseline governance and measurement in place.</li>
+              <li>60: measurable QA and rework gains through guided optimization.</li>
+              <li>90: scaled throughput with controlled risk and executive confidence.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
