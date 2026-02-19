@@ -1,72 +1,66 @@
-const scenes = {
-  a: document.getElementById("scene-a"),
-  b: document.getElementById("scene-b"),
-  c: document.getElementById("scene-c"),
-  d: document.getElementById("scene-d"),
-  e: document.getElementById("scene-e"),
-};
+const enterButton = document.getElementById("enter-gallery");
+const hero = document.getElementById("hero");
+const wall = document.getElementById("gallery-wall");
+const overlay = document.getElementById("overlay");
+const frames = [...document.querySelectorAll(".frame")];
 
-function showScene(next) {
-  Object.values(scenes).forEach((scene) => scene.classList.remove("is-active"));
-  scenes[next].classList.add("is-active");
-}
+let activeFrame = null;
 
-document.getElementById("grab-ticket").addEventListener("click", () => {
-  showScene("b");
-});
-
-document.getElementById("enter-gallery").addEventListener("click", async () => {
-  showScene("c");
-  await new Promise((resolve) => setTimeout(resolve, 160));
-  scenes.c.classList.add("open");
-
+enterButton.addEventListener("click", () => {
+  hero.classList.add("hidden");
   setTimeout(() => {
-    showScene("d");
-    runTypewriter();
-  }, 1900);
+    hero.style.display = "none";
+    wall.classList.add("visible");
+  }, 520);
 });
 
-async function typeText(element, text, speed = 78) {
-  for (const char of text) {
-    element.textContent += char;
-    await new Promise((resolve) => setTimeout(resolve, speed + Math.random() * 35));
+function closeActiveFrame() {
+  if (!activeFrame) return;
+  activeFrame.classList.remove("active");
+  overlay.classList.remove("visible");
+  document.body.style.overflow = "";
+  activeFrame = null;
+}
+
+function openFrame(frame) {
+  if (activeFrame && activeFrame !== frame) {
+    activeFrame.classList.remove("active");
   }
-}
 
-async function backspace(element, count, speed = 55) {
-  for (let i = 0; i < count; i += 1) {
-    element.textContent = element.textContent.slice(0, -1);
-    await new Promise((resolve) => setTimeout(resolve, speed + Math.random() * 25));
+  const willOpen = activeFrame !== frame;
+  if (!willOpen) {
+    closeActiveFrame();
+    return;
   }
+
+  frame.classList.add("active");
+  overlay.classList.add("visible");
+  document.body.style.overflow = "hidden";
+  activeFrame = frame;
 }
 
-async function runTypewriter() {
-  const line = document.getElementById("typed-line");
-  const title = document.getElementById("intro-title");
-  const byline = document.getElementById("intro-byline");
-
-  line.textContent = "";
-  await typeText(line, "Welcom", 82);
-  await new Promise((resolve) => setTimeout(resolve, 330));
-  await backspace(line, 1, 62);
-  await typeText(line, "e to", 85);
-
-  await new Promise((resolve) => setTimeout(resolve, 400));
-  title.classList.add("show");
-
-  await new Promise((resolve) => setTimeout(resolve, 420));
-  byline.classList.add("show");
-
-  await new Promise((resolve) => setTimeout(resolve, 1100));
-  showScene("e");
-}
-
-document.querySelectorAll(".toggle-exhibit").forEach((button) => {
-  button.addEventListener("click", () => {
-    const card = button.closest(".exhibit");
-    const willOpen = !card.classList.contains("open");
-    card.classList.toggle("open", willOpen);
-    button.textContent = willOpen ? "Close exhibit" : "Open exhibit";
-    button.setAttribute("aria-expanded", String(willOpen));
+frames.forEach((frame) => {
+  frame.addEventListener("click", (event) => {
+    if (event.target.classList.contains("frame-close")) return;
+    openFrame(frame);
   });
+
+  frame.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openFrame(frame);
+    }
+  });
+
+  const closeButton = frame.querySelector(".frame-close");
+  closeButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    closeActiveFrame();
+  });
+});
+
+overlay.addEventListener("click", closeActiveFrame);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeActiveFrame();
 });
