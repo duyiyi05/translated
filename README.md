@@ -1,62 +1,46 @@
-# symbiotic-enterprise-localization-pm-demo
+# Symbiotic Enterprise Localization System — Interactive Gallery Intro
 
-A portfolio repository that demonstrates how an enterprise localization program can scale EN→TR and EN→IT using **AI for acceleration** and **humans for judgment**, consistent with Translated’s symbiosis philosophy.
+A single-page, framework-free portfolio website for **Duygu TAŞ** that presents the **Symbiotic Enterprise Localization System (EN→TR | EN→IT)** as a minimal white-gallery experience.
 
-## What this demo is
+## Concept
 
-This repository simulates a localization PM operating model you could present after a pilot period:
-- Strategy and governance playbooks in `/docs`.
-- Realistic operational data in `/data`.
-- A static business review dashboard in `/dashboard` that computes core program KPIs in the browser.
+The page is designed like a curated exhibition journey:
+1. **Landing** — a calm entry point with a “Grab your ticket” CTA.
+2. **Ticket** — a museum-style admission card with download link to a ticket PDF.
+3. **Doors** — two gallery doors slide open to reveal the experience.
+4. **Intro** — a typewriter sequence with human typo-and-correction (“Welcom” → “Welcome”).
+5. **Exhibition wall** — six expandable exhibits explaining the operating model.
 
-## Why this aligns with Translated
+The visual direction is intentionally restrained: white surfaces, subtle borders, soft shadows, and smooth transitions.
 
-The operating model is designed around the same principles that make human + AI collaboration work in production:
-- **Context before generation**: projects are framed with audience, tone, product, and legal constraints.
-- **Memories and glossaries as governed assets**: language decisions are requested, approved, logged, and reused.
-- **Human-in-the-loop quality control**: linguists and reviewers are final decision owners on nuance and risk.
-- **Structured clarification loops**: uncertainty is surfaced early through blocker rules and batching workflows.
-- **Responsible AI controls**: quality severities, risk ownership, and audit-ready records are explicit.
+## Project structure
 
-## What artifacts are inside
+- `index.html` — all scenes and exhibit content.
+- `styles.css` — minimal gallery styling, responsive layout, transitions, and animations.
+- `script.js` — scene orchestration, door reveal, typewriter effect, and exhibit expand/collapse behavior.
+- `assets/ticket.pdf` — downloadable placeholder ticket file.
 
-### Documentation (`/docs`)
-1. `01_Client_Onboarding_Context_Pack.md`
-2. `02_Language_Assets_Glossary_TM_Governance.md`
-3. `03_Style_Selection_Guide_Faithful_Fluid_Creative.md`
-4. `04_Delivery_Workflow_End_to_End.md`
-5. `05_Clarification_Loop_Playbook.md`
-6. `06_QA_and_Risk_Control.md`
-7. `07_Business_Review_Pack.md`
-8. `08_30-60-90_Day_Plan.md`
+## Run locally
 
-### Data (`/data`)
-- `projects.csv`
-- `quality.csv`
-- `clarifications.csv`
-- `risks.csv`
+Because this site is static, you can open `index.html` directly.
 
-### Dashboard (`/dashboard`)
-- `index.html`
-- `styles.css`
-- `app.js`
+Or run a local server:
 
-## How to view the dashboard on GitHub Pages
+```bash
+python -m http.server 8000
+```
 
-1. Push this repo to GitHub as `symbiotic-enterprise-localization-pm-demo`.
-2. Open **Settings → Pages**.
+Then visit `http://localhost:8000`.
+
+## Deploy to GitHub Pages
+
+1. Push the repository to GitHub.
+2. Go to **Settings → Pages**.
 3. Set:
    - **Source**: `Deploy from a branch`
    - **Branch**: `main`
    - **Folder**: `/ (root)`
-4. Visit:
-   - `https://<your-username>.github.io/symbiotic-enterprise-localization-pm-demo/dashboard/`
+4. Open your published URL:
+   - `https://<your-username>.github.io/<repo-name>/`
 
-The dashboard loads CSV data from `../data`, then calculates:
-- OTD%
-- Average TAT
-- QA pass rate
-- Open risk count
-- Clarifications per 1k words
-
-No backend required.
+No backend or build process is required.
