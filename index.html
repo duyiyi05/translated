@@ -7,121 +7,24 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main>
-      <section class="hero" id="hero">
-        <p class="hero-kicker">Welcome to</p>
-        <h1 class="hero-title">Symbiotic Enterprise Localization System</h1>
-        <p class="hero-meta">EN→TR | EN→IT</p>
-        <p class="hero-meta">by Duygu TAŞ</p>
-        <button id="enter-gallery" class="enter-btn">Enter the Gallery</button>
+    <main class="stage">
+      <section id="curtain-scene" class="scene is-active" aria-label="Start curtain scene">
+        <div class="curtain-wrap" aria-hidden="true">
+          <div class="curtain-panel curtain-left"></div>
+          <div class="curtain-panel curtain-right"></div>
+        </div>
+        <button id="start-btn" class="start-btn" type="button">click here to start</button>
       </section>
 
-      <section id="gallery-wall" class="gallery-wall" aria-label="Exhibition wall">
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit I — Philosophy</div>
-          <p class="note">A disciplined symbiosis where speed and judgment coexist.</p>
-          <div class="details">
-            <ul>
-              <li>Humans and AI collaborate with clear role boundaries.</li>
-              <li>AI accelerates throughput; humans own nuance and accountability.</li>
-              <li>Quality is treated as a strategic business signal, not a final step.</li>
-            </ul>
-          </div>
+      <section id="welcome-scene" class="scene" aria-label="Welcome scene">
+        <div class="welcome-block">
+          <p id="line-welcome" class="welcome-big"></p>
+          <p id="line-system" class="welcome-system"></p>
+          <p id="line-locale" class="welcome-locale"></p>
+          <p id="line-by" class="welcome-by"></p>
         </div>
-
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit II — Context Engineering</div>
-          <p class="note">Better context upstream means fewer risks downstream.</p>
-          <div class="details">
-            <ul>
-              <li>Onboarding packs codify audience, tone, product, and legal constraints.</li>
-              <li>EN→TR and EN→IT risk maps are set before first delivery cycle.</li>
-              <li>Context is versioned so AI prompts and reviewers stay aligned.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit III — Human + AI Workflow</div>
-          <p class="note">Governance transforms process into repeatable quality.</p>
-          <div class="details">
-            <ul>
-              <li>Intake → prep → AI-assisted drafting → human QA → delivery loop.</li>
-              <li>Glossary and TM governance enforce stable language memory.</li>
-              <li>Approval paths are explicit for legal and brand-critical decisions.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit IV — Clarification Intelligence</div>
-          <p class="note">Precision emerges through structured questioning.</p>
-          <div class="details">
-            <ul>
-              <li>EN→IT: formality and gender agreement escalated via blocker rules.</li>
-              <li>EN→TR: tone calibration and terminology consistency monitored weekly.</li>
-              <li>Question batching reduces decision fatigue while preserving SLA speed.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit V — Enterprise Metrics</div>
-          <p class="note">Evidence-led operations build executive trust.</p>
-          <div class="details">
-            <ul>
-              <li>OTD, QA pass rate, rework trend, TAT, and risk exposure tracked monthly.</li>
-              <li>Signals tie linguistic quality directly to operational predictability.</li>
-              <li>Business review format enables stakeholder-grade reporting.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="frame" tabindex="0">
-          <button class="close" type="button">Close</button>
-          <div class="frame-corner tl" aria-hidden="true"></div>
-          <div class="frame-corner tr" aria-hidden="true"></div>
-          <div class="frame-corner bl" aria-hidden="true"></div>
-          <div class="frame-corner br" aria-hidden="true"></div>
-          <div class="plaque">Exhibit VI — 30-60-90 Plan</div>
-          <p class="note">Ambition is made credible through measurable cadence.</p>
-          <div class="details">
-            <ul>
-              <li>30: baseline governance and measurement in place.</li>
-              <li>60: measurable QA and rework gains through guided optimization.</li>
-              <li>90: scaled throughput with controlled risk and executive confidence.</li>
-            </ul>
-          </div>
-        </div>
-</section>
+      </section>
     </main>
-
-    <div class="backdrop"></div>
 
     <script src="script.js"></script>
   </body>
