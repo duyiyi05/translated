@@ -118,47 +118,11 @@ main {
   font-weight: 500;
 }
 
-.curator-note {
+.note {
   margin: 0;
   color: #4f4f4f;
   line-height: 1.45;
   font-size: 0.95rem;
-}
-
-.frame-details {
-  margin: 0;
-  padding-left: 1.2rem;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.4s ease;
-}
-
-.frame.active .frame-details {
-  max-height: 300px;
-  opacity: 1;
-  margin-top: 0.8rem;
-}
-
-.frame-close {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  border: 1px solid #cdcdcd;
-  background: #fff;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-
-.frame.active .frame-close {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .frame-corner {
@@ -176,44 +140,6 @@ main {
 .frame-corner.bl { bottom: 0.45rem; left: 0.45rem; transform: rotate(-90deg); }
 .frame-corner.br { bottom: 0.45rem; right: 0.45rem; transform: rotate(180deg); }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(240, 240, 240, 0.76);
-  backdrop-filter: blur(3px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-
-.overlay.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.frame.active {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: min(780px, calc(100vw - 2rem));
-  max-height: min(88vh, 760px);
-  overflow: auto;
-  z-index: 30;
-  transform: translate(-50%, -50%) scale(1);
-  animation: zoomIn 0.35s ease;
-}
-
-@keyframes zoomIn {
-  from {
-    transform: translate(-50%, -46%) scale(0.94);
-    opacity: 0.65;
-  }
-  to {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
 @media (max-width: 680px) {
   .hero {
     min-height: 62vh;
@@ -227,4 +153,73 @@ main {
   .frame {
     min-height: 240px;
   }
+}
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 999;
+}
+.backdrop.is-on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Frame base */
+.frame {
+  position: relative;
+  background: #fff;
+}
+
+/* IMPORTANT: Don't clip expanded content */
+.frame { overflow: visible; }
+
+/* Details hidden by default */
+.frame .details {
+  display: none;
+  margin-top: 12px;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* When open, turn into a modal-like card */
+.frame.is-open {
+  position: fixed;
+  inset: 8vh 10vw;
+  z-index: 1000;
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.20);
+  padding: 28px;
+  overflow: auto; /* THIS is key */
+}
+
+/* Show details when open */
+.frame.is-open .details {
+  display: block;
+}
+
+/* Close button (optional) */
+.frame .close {
+  display: none;
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.frame.is-open .close {
+  display: inline-flex;
+}
+
+.details ul {
+  margin: 0;
+  padding-left: 1.2rem;
 }
