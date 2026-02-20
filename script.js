@@ -1,6 +1,7 @@
 const curtainScene = document.getElementById("curtain-scene");
 const welcomeScene = document.getElementById("welcome-scene");
 const startBtn = document.getElementById("start-btn");
+const welcomeBlock = document.querySelector(".welcome-block");
 
 const lineWelcome = document.getElementById("line-welcome");
 const lineSystem = document.getElementById("line-system");
@@ -37,5 +38,7 @@ startBtn.addEventListener("click", async () => {
   curtainScene.classList.remove("is-active");
   welcomeScene.classList.add("is-active");
 
+  await delay(1800);
+  welcomeBlock.classList.add("lit");
   runWelcomeTyping();
 });
