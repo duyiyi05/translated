@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbiotic Enterprise Localization PM Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Enterprise Localization Business Review</h1>
+      <p>EN→TR and EN→IT delivery program — humans + AI in symbiosis</p>
+    </header>
+
+    <main>
+      <section class="kpi-grid" aria-label="KPI cards">
+        <article class="card"><h2>OTD %</h2><p id="kpi-otd">—</p></article>
+        <article class="card"><h2>Avg TAT (days)</h2><p id="kpi-tat">—</p></article>
+        <article class="card"><h2>QA Pass Rate</h2><p id="kpi-qa">—</p></article>
+        <article class="card"><h2>Open Risks</h2><p id="kpi-risks">—</p></article>
+        <article class="card"><h2>Clarifications / 1k words</h2><p id="kpi-clar">—</p></article>
+      </section>
+
+      <section class="charts">
+        <article class="card chart-card">
+          <h2>Delivery Status Mix</h2>
+          <canvas id="status-chart" width="560" height="220"></canvas>
+        </article>
+
+        <article class="card chart-card">
+          <h2>QA Outcomes</h2>
+          <canvas id="qa-chart" width="560" height="220"></canvas>
+        </article>
+
+        <article class="card chart-card">
+          <h2>Clarification Types</h2>
+          <canvas id="clar-chart" width="560" height="220"></canvas>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Executive Notes</h2>
+        <ul>
+          <li>Context-prepared AI drafting improves speed on repetitive support and release content.</li>
+          <li>Human reviewers retain final authority on legal, tone-critical, and brand-sensitive materials.</li>
+          <li>Glossary + TM governance converts every decision into reusable quality memory.</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
