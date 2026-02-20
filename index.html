@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbiotic Enterprise Localization System — Duygu TAŞ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <section id="curtain-scene" class="scene is-active" aria-label="Start curtain scene">
+        <div class="curtain-wrap" aria-hidden="true">
+          <div class="curtain-panel curtain-left"></div>
+          <div class="curtain-panel curtain-right"></div>
+        </div>
+        <button id="start-btn" class="start-btn" type="button">click here to start</button>
+      </section>
+
+      <section id="welcome-scene" class="scene" aria-label="Welcome scene">
+        <div class="welcome-block">
+          <p id="line-welcome" class="welcome-big"></p>
+          <p id="line-system" class="welcome-system"></p>
+          <p id="line-locale" class="welcome-locale"></p>
+          <p id="line-by" class="welcome-by"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
