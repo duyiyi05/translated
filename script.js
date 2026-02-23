@@ -2,7 +2,7 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-const scenes = ["scene-lobby", "scene-ticket", "scene-doors", "scene-gallery", "scene-exit"];
+const scenes = ["scene-lobby", "scene-ticket", "scene-doors", "scene-about", "scene-gallery", "scene-exit"];
 function showScene(id) {
   scenes.forEach((sid) => {
     const el = document.getElementById(sid);
@@ -201,8 +201,50 @@ $$(".frame").forEach((f) => {
 });
 
 // ---------- Scene flow ----------
-const promiseLine = $("#promise-line");
-typeOnce(promiseLine, "Human-centered, AI-integrated enterprise localization delivery", 18);
+// Lobby typewriter sequence (after sweep)
+function typeSequence(items, gap = 120) {
+  let i = 0;
+  const run = () => {
+    if (i >= items.length) return;
+    const [el, text, speed] = items[i++];
+    typeOnce(el, text, speed);
+    // estimate finish time
+    const ms = Math.max(380, text.length * speed + gap);
+    setTimeout(run, ms);
+  };
+  run();
+}
+
+function resetTyped(el) {
+  if (!el) return;
+  el.dataset.typed = "0";
+  el.classList.remove("is-done");
+  el.textContent = "";
+}
+
+function runLobbyTyping() {
+  const kicker = $("#lobby-kicker");
+  const title = $("#lobby-title");
+  const promise = $("#promise-line");
+  const subtitle = $("#lobby-subtitle");
+  const byline = $("#lobby-byline");
+
+  [kicker, title, promise, subtitle, byline].forEach(resetTyped);
+
+  typeSequence(
+    [
+      [kicker, "Welcome to", 18],
+      [title, "Symbiotic Enterprise Localization System", 10],
+      [promise, "Human-centered, AI-integrated enterprise localization delivery", 16],
+      [subtitle, "EN→TR | EN→IT", 14],
+      [byline, "by Duygu TAŞ", 16],
+    ],
+    140
+  );
+}
+
+// Run on first load
+runLobbyTyping();
 
 // Lobby -> Ticket
 $("#enter-btn")?.addEventListener("click", () => {
@@ -213,18 +255,14 @@ $("#enter-btn")?.addEventListener("click", () => {
 
 // Ticket animations
 const ticket = $("#ticket");
-const stamp = $("#stamp");
 
 function animateTicket() {
   ticket?.classList.add("ticket-in");
-  // stamp after ticket settles
-  setTimeout(() => stamp?.classList.add("stamp-on"), 650);
 }
 
 $("#present-ticket")?.addEventListener("click", () => {
-  // stamp punch + move to doors
+  // ticket move to doors
   ticket?.classList.add("ticket-presented");
-  stamp?.classList.add("stamp-pulse");
   setTimeout(() => showScene("scene-doors"), 700);
 
   // doors auto-open after scan
@@ -237,7 +275,7 @@ $("#present-ticket")?.addEventListener("click", () => {
   }, 1500);
 
   setTimeout(() => {
-    showScene("scene-gallery");
+    showScene("scene-about");
   }, 2150);
 });
 
@@ -247,7 +285,6 @@ const observer = new MutationObserver(() => {
   if (ticketScene.classList.contains("is-active")) {
     // reset then animate in
     ticket?.classList.remove("ticket-in", "ticket-presented");
-    stamp?.classList.remove("stamp-on", "stamp-pulse");
     requestAnimationFrame(() => animateTicket());
   }
 });
@@ -258,3 +295,41 @@ $("#to-exit")?.addEventListener("click", () => {
   $("#scene-gallery")?.classList.add("exit");
   setTimeout(() => showScene("scene-exit"), 520);
 });
+
+// ---------- Nav arrows (Back/Forward) ----------
+const prevBtn = $("#nav-prev");
+const nextBtn = $("#nav-next");
+
+function getActiveSceneIndex() {
+  const activeId = scenes.find((id) => document.getElementById(id)?.classList.contains("is-active"));
+  return Math.max(0, scenes.indexOf(activeId));
+}
+
+function updateNavArrows() {
+  const idx = getActiveSceneIndex();
+  if (prevBtn) prevBtn.classList.toggle("is-hidden", idx === 0);
+  if (nextBtn) nextBtn.classList.toggle("is-hidden", idx === scenes.length - 1);
+}
+
+function goToIndex(nextIndex) {
+  const clamped = Math.min(scenes.length - 1, Math.max(0, nextIndex));
+  const targetId = scenes[clamped];
+  if (!targetId) return;
+
+  // close modal if open
+  if (modal?.classList.contains("is-open")) closeModal();
+
+  showScene(targetId);
+
+  // rerun lobby typing if user goes back to lobby
+  if (targetId === "scene-lobby") runLobbyTyping();
+
+  updateNavArrows();
+}
+
+prevBtn?.addEventListener("click", () => goToIndex(getActiveSceneIndex() - 1));
+nextBtn?.addEventListener("click", () => goToIndex(getActiveSceneIndex() + 1));
+
+// update arrows whenever scenes change (lightweight polling)
+setInterval(updateNavArrows, 250);
+updateNavArrows();

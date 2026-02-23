@@ -8,17 +8,26 @@
   </head>
   <body>
     <main class="app">
+      <!-- Nav arrows -->
+      <nav class="nav-arrows" aria-label="Scene navigation">
+        <button id="nav-prev" class="nav-arrow" type="button" aria-label="Previous">←</button>
+        <button id="nav-next" class="nav-arrow" type="button" aria-label="Next">→</button>
+      </nav>
+
       <section id="scene-lobby" class="scene is-active">
         <div class="curtain-wrap" aria-hidden="true">
           <div class="curtain-panel curtain-left"></div>
           <div class="curtain-panel curtain-right"></div>
         </div>
+
+        <div class="lobby-sweep" aria-hidden="true"></div>
+
         <div class="center-stack">
-          <p class="hero-kicker">Welcome to</p>
-          <h1 class="hero-title">Symbiotic Enterprise Localization System</h1>
+          <p id="lobby-kicker" class="hero-kicker"></p>
+          <h1 id="lobby-title" class="hero-title"></h1>
           <p id="promise-line" class="promise"></p>
-          <p class="subtitle">EN→TR | EN→IT</p>
-          <p class="byline">by Duygu TAŞ</p>
+          <p id="lobby-subtitle" class="subtitle"></p>
+          <p id="lobby-byline" class="byline"></p>
           <button id="enter-btn" class="primary" type="button">Enter the Exhibition</button>
         </div>
       </section>
@@ -32,7 +41,6 @@
             <p>Scope: EN→TR | EN→IT</p>
             <p>Volumes: 180k+ words / quarter</p>
             <p>KPIs: OTD, QA pass rate, TAT, risk closure</p>
-            <div id="stamp" class="stamp">APPROVED</div>
           </article>
           <button id="present-ticket" class="primary" type="button">Present Ticket</button>
         </div>
@@ -43,6 +51,48 @@
         <div class="doors">
           <div class="door left"></div>
           <div class="door right"></div>
+        </div>
+      </section>
+
+      <section id="scene-about" class="scene">
+        <div class="about-wrap">
+          <div class="about-card">
+            <div class="about-left">
+              <img
+                id="about-photo"
+                class="about-photo"
+                src="assets/duygu.jpg"
+                alt="Portrait of Duygu TAŞ"
+              />
+            </div>
+
+            <div class="about-right">
+              <p class="about-kicker">About the Curator</p>
+              <h2 class="about-title">Duygu TAŞ</h2>
+
+              <p class="about-text">
+                I built this exhibition because enterprise localization isn’t “translation” — it’s
+                delivery leadership. I wanted a format that proves how I think: in systems, risks,
+                metrics, and continuous improvement.
+              </p>
+
+              <p class="about-text">
+                I’m resourceful and fast to adapt. When something could slow delivery (ambiguity,
+                context gaps, consistency drift), I don’t push harder — I design a better workflow.
+                I use AI and NLP tools as accelerators, with clear human accountability, so quality
+                stays measurable and decisions stay explainable.
+              </p>
+
+              <p class="about-text">
+                If you’re looking for a PM who can own enterprise service delivery end-to-end —
+                on time, within budget, and with continuous improvement — welcome. Step inside.
+              </p>
+
+              <div class="about-micro">
+                <span>Focus:</span> EN→TR • EN→IT • Enterprise Accounts • AI-integrated ops
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -69,7 +119,16 @@
           <p class="plan">30-60-90: Baseline → Optimize → Scale with control.</p>
           <div class="actions">
             <a class="primary link-btn" href="https://github.com/duyiyi05/translated" target="_blank" rel="noreferrer">View the Repo Artifacts</a>
-            <a class="primary link-btn secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">Contact / LinkedIn</a>
+            <a class="primary link-btn secondary" href="https://www.linkedin.com/in/duygu-ta%C5%9F-%E6%9D%9C%E4%BE%9D%E4%BE%9D/" target="_blank" rel="noreferrer">
+              Contact / LinkedIn
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-title">Contact</div>
+            <div class="contact-line">Duygu TAŞ</div>
+            <div class="contact-line">+90 542 374 7442</div>
+            <div class="contact-line">duygutasw@hotmail.com</div>
           </div>
         </div>
       </section>

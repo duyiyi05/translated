@@ -49,6 +49,43 @@ body{
   to{ opacity:0; transform: translateY(-8px); filter: blur(2px); }
 }
 
+/* ---------- Nav arrows ---------- */
+.nav-arrows{
+  position: fixed;
+  left: 18px;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display:flex;
+  justify-content: space-between;
+  pointer-events:none;
+  z-index: 60;
+}
+
+.nav-arrow{
+  pointer-events:auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.04);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 320ms var(--ease), background 320ms var(--ease), border-color 320ms var(--ease), opacity 320ms var(--ease);
+  opacity: .9;
+}
+
+.nav-arrow:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.5);
+}
+
+.nav-arrow.is-hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ---------- Lobby ---------- */
 .center-stack{
   text-align:center;
@@ -163,6 +200,34 @@ body{
   to{ transform: translateX(95%); }
 }
 
+/* Lobby sweep light */
+.lobby-sweep{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 480px at -20% 55%, rgba(255,255,255,.0), rgba(255,255,255,.0) 55%),
+    rgba(0,0,0,0);
+  opacity: 0;
+}
+
+#scene-lobby.is-active .lobby-sweep{
+  opacity: 1;
+  animation: sweep 1100ms var(--ease) both;
+}
+
+@keyframes sweep{
+  0%{
+    background: radial-gradient(900px 480px at -20% 55%, rgba(255,255,255,.0), rgba(255,255,255,.0) 55%), rgba(0,0,0,0);
+  }
+  65%{
+    background: radial-gradient(900px 480px at 120% 55%, rgba(255,255,255,.22), rgba(255,255,255,.0) 60%), rgba(0,0,0,0);
+  }
+  100%{
+    background: radial-gradient(700px 380px at 50% 48%, rgba(255,255,255,.16), rgba(255,255,255,.0) 62%), rgba(0,0,0,0);
+  }
+}
+
 /* ---------- Ticket Desk ---------- */
 .ticket-desk{
   display:flex;
@@ -217,39 +282,6 @@ body{
 @keyframes ticketIn{
   from{ opacity:0; transform: translateY(18px) scale(.98); }
   to{ opacity:1; transform: translateY(0) scale(1); }
-}
-
-/* stamp */
-.stamp{
-  position:absolute;
-  right: 18px;
-  top: 18px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.35);
-  opacity:0;
-  transform: rotate(-12deg) scale(.92);
-  letter-spacing:.12em;
-  font-weight:700;
-  background: rgba(255,255,255,.04);
-  text-shadow: 0 0 18px rgba(255,255,255,.12);
-}
-
-.stamp-on{
-  animation: stampOn 520ms var(--ease) both;
-}
-@keyframes stampOn{
-  from{ opacity:0; transform: rotate(-12deg) scale(.85) translateY(-6px); }
-  to{ opacity:.95; transform: rotate(-12deg) scale(1) translateY(0); }
-}
-
-.stamp-pulse{
-  animation: stampPulse 520ms var(--ease) both;
-}
-@keyframes stampPulse{
-  0%{ transform: rotate(-12deg) scale(1); }
-  40%{ transform: rotate(-12deg) scale(1.05); }
-  100%{ transform: rotate(-12deg) scale(1); }
 }
 
 .ticket-presented{
@@ -319,6 +351,81 @@ body{
 }
 @keyframes doorLeft{ to{ transform: translateX(-102%); } }
 @keyframes doorRight{ to{ transform: translateX(102%); } }
+
+/* ---------- About ---------- */
+.about-wrap{
+  width: min(980px, 100%);
+  display:flex;
+  justify-content:center;
+}
+
+.about-card{
+  width: 100%;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.02);
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  overflow:hidden;
+}
+
+.about-left{
+  padding: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,.03);
+  border-right: 1px solid rgba(255,255,255,.10);
+}
+
+.about-photo{
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.03);
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+
+.about-right{
+  padding: 22px;
+}
+
+.about-kicker{
+  margin: 0 0 10px;
+  letter-spacing: .14em;
+  opacity: .78;
+}
+
+.about-title{
+  margin: 0 0 14px;
+  letter-spacing: .08em;
+}
+
+.about-text{
+  margin: 0 0 12px;
+  opacity: .86;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.about-micro{
+  margin-top: 10px;
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  opacity:.8;
+  letter-spacing: .03em;
+  font-size: 12px;
+}
+
+@media (max-width: 900px){
+  .about-card{ grid-template-columns: 1fr; }
+  .about-left{ border-right: none; border-bottom: 1px solid rgba(255,255,255,.10); }
+  .about-photo{ max-width: 220px; }
+}
 
 /* ---------- Gallery ---------- */
 #scene-gallery{
@@ -428,6 +535,27 @@ body{
   gap: 12px;
   justify-content:center;
   flex-wrap:wrap;
+}
+
+/* Exit contact */
+.contact-card{
+  margin: 18px auto 0;
+  width: min(520px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  padding: 14px 16px;
+  text-align: center;
+}
+.contact-title{
+  letter-spacing: .14em;
+  opacity: .75;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.contact-line{
+  opacity: .88;
+  margin: 4px 0;
 }
 
 /* ---------- Modal ---------- */
