@@ -637,3 +637,48 @@ body{
 .artifacts-row a:hover{
   border-bottom-color: rgba(255,255,255,.7);
 }
+
+.case-chip{
+  margin: 14px 0 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  border-radius: 16px;
+  padding: 12px 12px;
+}
+.case-title{
+  letter-spacing: .1em;
+  opacity: .85;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.case-line{
+  opacity: .86;
+  margin: 4px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.ticket-desk{ position:relative; }
+
+.ticket-notes{
+  position: absolute;
+  width: min(900px, 100%);
+  pointer-events:none;
+}
+
+.note{
+  position:absolute;
+  max-width: 260px;
+  font-size: 12px;
+  opacity: .72;
+  letter-spacing: .04em;
+  line-height: 1.35;
+}
+
+.note-left{ left: -10px; top: 90px; transform: translateX(-100%); }
+.note-right{ right: -10px; top: 120px; transform: translateX(100%); text-align:left; }
+.note-bottom{ left: 50%; bottom: -6px; transform: translate(-50%, 100%); text-align:center; max-width: 420px; }
+
+@media (max-width: 900px){
+  .ticket-notes{ display:none; } /* hide on mobile to keep it clean */
+}

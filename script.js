@@ -9,8 +9,11 @@ function showScene(id) {
     if (!el) return;
     el.classList.toggle("is-active", sid === id);
   });
-  // reset scroll for mobile
+
   window.scrollTo({ top: 0, behavior: "instant" });
+
+  onSceneEnter(id); // ✅ important
+  updateNavArrows(); // ✅ keep arrows accurate
 }
 
 // ---------- Typewriter (promise line) ----------
@@ -222,29 +225,29 @@ function resetTyped(el) {
   el.textContent = "";
 }
 
-function runLobbyTyping() {
+function runLobbyTyping(force = false){
   const kicker = $("#lobby-kicker");
   const title = $("#lobby-title");
   const promise = $("#promise-line");
   const subtitle = $("#lobby-subtitle");
   const byline = $("#lobby-byline");
 
-  [kicker, title, promise, subtitle, byline].forEach(resetTyped);
+  // ✅ If not forcing, don't re-run if already typed
+  if (!force && promise?.dataset?.typed === "1") return;
 
-  typeSequence(
-    [
-      [kicker, "Welcome to", 18],
-      [title, "Symbiotic Enterprise Localization System", 10],
-      [promise, "Human-centered, AI-integrated enterprise localization delivery", 16],
-      [subtitle, "EN→TR | EN→IT", 14],
-      [byline, "by Duygu TAŞ", 16],
-    ],
-    140
-  );
+  [kicker,title,promise,subtitle,byline].forEach(resetTyped);
+
+  typeSequence([
+    [kicker, "Welcome to", 22],
+    [title, "Symbiotic Enterprise Localization System", 14],
+    [promise, "Human-centered, AI-integrated enterprise localization delivery", 22],
+    [subtitle, "EN→TR | EN→IT", 20],
+    [byline, "by Duygu TAŞ", 20],
+  ], 220);
 }
 
 // Run on first load
-runLobbyTyping();
+document.addEventListener("DOMContentLoaded", () => runLobbyTyping(true));
 
 // Lobby -> Ticket
 $("#enter-btn")?.addEventListener("click", () => {
@@ -258,6 +261,18 @@ const ticket = $("#ticket");
 
 function animateTicket() {
   ticket?.classList.add("ticket-in");
+}
+
+function onSceneEnter(id) {
+  if (id === "scene-lobby") {
+    runLobbyTyping(true); // true = force retype every time
+  }
+
+  if (id === "scene-ticket") {
+    // reset ticket animation every time you come back
+    ticket?.classList.remove("ticket-in", "ticket-presented");
+    requestAnimationFrame(() => animateTicket());
+  }
 }
 
 $("#present-ticket")?.addEventListener("click", () => {
@@ -278,17 +293,6 @@ $("#present-ticket")?.addEventListener("click", () => {
     showScene("scene-about");
   }, 2150);
 });
-
-// When ticket scene becomes active, animate in (simple observer)
-const ticketScene = $("#scene-ticket");
-const observer = new MutationObserver(() => {
-  if (ticketScene.classList.contains("is-active")) {
-    // reset then animate in
-    ticket?.classList.remove("ticket-in", "ticket-presented");
-    requestAnimationFrame(() => animateTicket());
-  }
-});
-if (ticketScene) observer.observe(ticketScene, { attributes: true, attributeFilter: ["class"] });
 
 // Gallery -> Exit
 $("#to-exit")?.addEventListener("click", () => {
@@ -320,9 +324,6 @@ function goToIndex(nextIndex) {
   if (modal?.classList.contains("is-open")) closeModal();
 
   showScene(targetId);
-
-  // rerun lobby typing if user goes back to lobby
-  if (targetId === "scene-lobby") runLobbyTyping();
 
   updateNavArrows();
 }
