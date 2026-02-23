@@ -604,3 +604,88 @@ body{
 
 
 
+
+/* ---------- Mobile polish ---------- */
+@media (max-width: 768px){
+  .scene{
+    min-height: 100svh;
+    padding: 18px 16px 28px;
+  }
+
+  .nav-arrows{
+    left: 10px;
+    right: 10px;
+    top: auto;
+    bottom: 12px;
+    transform: none;
+  }
+
+  .nav-arrow{
+    width: 42px;
+    height: 42px;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero-title{
+    font-size: clamp(28px, 11vw, 52px);
+  }
+
+  .hero-kicker,
+  .subtitle,
+  .byline,
+  .promise{
+    letter-spacing: .05em;
+  }
+
+  .ticket-card,
+  .about-right,
+  .gallery-wall,
+  .modal-card{
+    padding: 16px;
+  }
+
+  .frame{
+    min-height: 116px;
+  }
+
+  .actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions .primary,
+  .actions .link-btn,
+  #to-exit,
+  #present-ticket,
+  #enter-btn{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .artifacts-row{
+    gap: 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px){
+  .center-stack{ max-width: 100%; }
+
+  .ticket-card h2,
+  .about-title,
+  .gallery-title{
+    font-size: 20px;
+  }
+
+  .kpi-strip{
+    gap: 8px;
+  }
+
+  .kpi-strip span{
+    width: 100%;
+  }
+
+  .contact-card{
+    padding: 12px;
+  }
+}
