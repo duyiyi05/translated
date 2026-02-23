@@ -7,26 +7,90 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="stage">
-      <section id="curtain-scene" class="scene is-active" aria-label="Start curtain scene">
+    <main class="app">
+      <section id="scene-lobby" class="scene is-active">
         <div class="curtain-wrap" aria-hidden="true">
           <div class="curtain-panel curtain-left"></div>
           <div class="curtain-panel curtain-right"></div>
         </div>
-        <button id="start-btn" class="start-btn" type="button">click here to start</button>
+        <div class="center-stack">
+          <p class="hero-kicker">Welcome to</p>
+          <h1 class="hero-title">Symbiotic Enterprise Localization System</h1>
+          <p id="promise-line" class="promise"></p>
+          <p class="subtitle">EN→TR | EN→IT</p>
+          <p class="byline">by Duygu TAŞ</p>
+          <button id="enter-btn" class="primary" type="button">Enter the Exhibition</button>
+        </div>
       </section>
 
-      <section id="welcome-scene" class="scene" aria-label="Welcome scene">
-        <div class="moving-light" aria-hidden="true"></div>
-        <div class="welcome-block">
-          <p id="line-welcome" class="welcome-big"></p>
-          <p id="line-system" class="welcome-system"></p>
-          <p id="line-locale" class="welcome-locale"></p>
-          <p id="line-by" class="welcome-by"></p>
-          <button class="ticket-btn" type="button">Get the ticket</button>
+      <section id="scene-ticket" class="scene">
+        <div class="ticket-desk">
+          <article id="ticket" class="ticket-card">
+            <p class="ticket-label">NLP + operational governance demo</p>
+            <h2>Exhibition Ticket</h2>
+            <p>Client: Enterprise SaaS Localization Program</p>
+            <p>Scope: EN→TR | EN→IT</p>
+            <p>Volumes: 180k+ words / quarter</p>
+            <p>KPIs: OTD, QA pass rate, TAT, risk closure</p>
+            <div id="stamp" class="stamp">APPROVED</div>
+          </article>
+          <button id="present-ticket" class="primary" type="button">Present Ticket</button>
+        </div>
+      </section>
+
+      <section id="scene-doors" class="scene">
+        <div class="scan-line"></div>
+        <div class="doors">
+          <div class="door left"></div>
+          <div class="door right"></div>
+        </div>
+      </section>
+
+      <section id="scene-gallery" class="scene">
+        <div class="dust" aria-hidden="true"></div>
+        <h2 class="gallery-title">Curated Rooms</h2>
+        <div id="gallery-wall" class="gallery-wall">
+          <article class="frame" data-frame="1"><h3>I. Context Room</h3><p>Audience, tone, product intent, constraints.</p></article>
+          <article class="frame" data-frame="2"><h3>II. Symbiosis Workshop</h3><p>NLP-assisted workflow design with human accountability.</p></article>
+          <article class="frame" data-frame="3"><h3>III. Workflow Corridor</h3><p>Intake → prep → production → QA → delivery.</p></article>
+          <article class="frame" data-frame="4"><h3>IV. QA Atelier</h3><p>Taxonomy + severity weighting + linguistic risk modeling.</p></article>
+          <article class="frame" data-frame="5"><h3>V. Metrics Chamber</h3><p>OTD, QA, rework, TAT, and risks in one view.</p></article>
+          <article class="frame" data-frame="6"><h3>VI. 30-60-90 Wing</h3><p>Measurable impact planning with governance milestones.</p></article>
+        </div>
+        <button id="to-exit" class="primary secondary" type="button">Continue to Exit Hall</button>
+      </section>
+
+      <section id="scene-exit" class="scene">
+        <div class="exit-wrap">
+          <h2>Exit Hall</h2>
+          <div class="kpi-strip">
+            <span>OTD: 96%</span><span>QA Pass: 98%</span><span>TAT: -12%</span><span>Open Risks: -25%</span>
+          </div>
+          <p class="plan">30-60-90: Baseline → Optimize → Scale with control.</p>
+          <div class="actions">
+            <a class="primary link-btn" href="README.md" target="_blank" rel="noreferrer">View the Repo Artifacts</a>
+            <a class="primary link-btn secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">Contact / LinkedIn</a>
+          </div>
         </div>
       </section>
     </main>
+
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <button id="close-modal" class="close" type="button">Close</button>
+        <h3 id="modal-title"></h3>
+        <p id="modal-note" class="modal-note"></p>
+        <button id="reveal-btn" class="primary secondary" type="button">Reveal</button>
+        <ul id="modal-list" class="modal-list"></ul>
+        <div class="artifacts-row">
+          <span>Artifacts:</span>
+          <a href="assets/risk-register.md" target="_blank" rel="noreferrer">Risk Register</a>
+          <a href="assets/quality-taxonomy.md" target="_blank" rel="noreferrer">Quality Taxonomy</a>
+          <a href="assets/clarification-log.md" target="_blank" rel="noreferrer">Clarification Log</a>
+          <a href="assets/business-review-template.md" target="_blank" rel="noreferrer">Business Review Template</a>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
