@@ -1,0 +1,74 @@
+:root {
+  --bg: #f3f6fc;
+  --text: #10203a;
+  --muted: #4b5d7c;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+header {
+  padding: 28px 20px;
+  background: linear-gradient(120deg, #0b1731, #1d4ed8);
+  color: #fff;
+}
+
+header h1 { margin: 0 0 8px; font-size: 1.9rem; }
+header p { margin: 0; opacity: .92; }
+
+main {
+  max-width: 1120px;
+  margin: 20px auto 42px;
+  padding: 0 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 15px 16px;
+  box-shadow: 0 3px 14px rgba(10, 24, 52, 0.1);
+}
+
+.card h2 {
+  margin: 0;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+.card p {
+  margin: 10px 0 0;
+  font-size: 1.72rem;
+  font-weight: 700;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.chart-card canvas {
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+ul { margin: 10px 0 0; padding-left: 18px; }
+li { margin-bottom: 8px; }

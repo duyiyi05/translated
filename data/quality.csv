@@ -1,0 +1,11 @@
+project_id,locale,pass_fail,error_category,severity
+P-2401,EN-TR,Pass,Terminology,Minor
+P-2402,EN-IT,Fail,Formality Consistency,Major
+P-2403,EN-TR,Pass,Fluency,Minor
+P-2404,EN-IT,Pass,Terminology,Minor
+P-2405,EN-TR,Fail,Terminology,Critical
+P-2406,EN-IT,Pass,Placeholder Integrity,Minor
+P-2407,EN-TR,Pass,Tone Fit,Minor
+P-2408,EN-IT,Fail,Gender Agreement,Major
+P-2411,EN-TR,Pass,Consistency,Minor
+P-2412,EN-IT,Pass,Fluency,Minor
