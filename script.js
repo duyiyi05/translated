@@ -1,145 +1,260 @@
-const scenes = {
-  lobby: document.getElementById("scene-lobby"),
-  ticket: document.getElementById("scene-ticket"),
-  doors: document.getElementById("scene-doors"),
-  gallery: document.getElementById("scene-gallery"),
-  exit: document.getElementById("scene-exit"),
-};
+// ---------- Helpers ----------
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-const enterBtn = document.getElementById("enter-btn");
-const presentBtn = document.getElementById("present-ticket");
-const toExitBtn = document.getElementById("to-exit");
-const stamp = document.getElementById("stamp");
-const promise = document.getElementById("promise-line");
+const scenes = ["scene-lobby", "scene-ticket", "scene-doors", "scene-gallery", "scene-exit"];
+function showScene(id) {
+  scenes.forEach((sid) => {
+    const el = document.getElementById(sid);
+    if (!el) return;
+    el.classList.toggle("is-active", sid === id);
+  });
+  // reset scroll for mobile
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
 
-const modal = document.getElementById("modal");
-const closeModalBtn = document.getElementById("close-modal");
-const modalTitle = document.getElementById("modal-title");
-const modalNote = document.getElementById("modal-note");
-const modalList = document.getElementById("modal-list");
-const revealBtn = document.getElementById("reveal-btn");
+// ---------- Typewriter (promise line) ----------
+function typeOnce(el, text, speed = 22) {
+  if (!el || el.dataset.typed === "1") return;
+  el.dataset.typed = "1";
+  el.textContent = "";
+  let i = 0;
+  const tick = () => {
+    el.textContent = text.slice(0, i++);
+    if (i <= text.length) setTimeout(tick, speed);
+    else el.classList.add("is-done");
+  };
+  tick();
+}
 
-const frames = [...document.querySelectorAll(".frame")];
-const wall = document.getElementById("gallery-wall");
-
-const frameData = {
+// ---------- Data (frames content) ----------
+const FRAME_DATA = {
   1: {
-    title: "Exhibit I — The Context Room",
-    note: "Before translation, we build the world it lives in.",
+    title: "I. Context Room",
+    note:
+      "Context is a deliverable. Without it, enterprise localization becomes guesswork.",
     bullets: [
-      "Context pack: audience, tone, constraints.",
-      "Asset setup: glossary, style guide, TM.",
-      "Locale risks: TR expansion, IT formality.",
+      "Context pack: screenshots mapped to string IDs + product walkthrough",
+      "Terminology: glossary with ownership + freeze policy after approval",
+      "EN→IT example: formality choice (Lei/tu) defined per audience + product area",
+      "EN→TR example: HR vocabulary consistency + UI length/fit constraints",
+      "Definition of Done: signed scope + success KPIs before production",
     ],
   },
   2: {
-    title: "Exhibit II — Symbiosis Workshop",
-    note: "I use NLP as an operational accelerator—not an authority. The system preserves context and accountability.",
+    title: "II. Symbiosis Workshop",
+    note:
+      "I use NLP to accelerate delivery—never to replace accountability. AI drafts; humans decide.",
     bullets: [
-      "NLP-assisted workflow design with governance.",
-      "Terminology consistency + string-level constraints.",
-      "MT output is treated as draft; accountability stays human.",
+      "NLP-assisted workflow: context-aware MT → MTPE → reviewer → final QA",
+      "Risk-based routing: legal/policy content can bypass MT when required",
+      "Terminology constraints: glossary enforcement + consistency checks",
+      "Feedback loop: LQA findings become preventive rules (not one-off fixes)",
+      "Target: +25% productivity while keeping LQA ≥ 95%",
     ],
   },
   3: {
-    title: "Exhibit III — Workflow Corridor",
-    note: "Delivery is designed as a repeatable enterprise pathway.",
+    title: "III. Workflow Corridor",
+    note:
+      "Enterprise trust is built on predictable operations: gates, owners, and escalation rules.",
     bullets: [
-      "Intake triage and risk routing.",
-      "Human + AI production with approval gates.",
-      "Feedback loop into memory and playbooks.",
+      "Intake → prep → production → QA → delivery (with sign-off checkpoints)",
+      "RACI: clear ownership across PM, linguists, reviewers, SMEs",
+      "SLA: clarifications <48h, delivery cadence locked to release cycle",
+      "Early warning: risks tied to timeline gates (traffic light status)",
+      "OTD target: ≥ 98% with buffer strategy + exception handling",
     ],
   },
   4: {
-    title: "Exhibit IV — QA Atelier",
-    note: "Quality is operationalized through taxonomy and severity weighting.",
+    title: "IV. QA Atelier",
+    note:
+      "Quality is measurable. I design a system where issues become learning—fast.",
     bullets: [
-      "Linguistic risk modeling by content class.",
-      "Error taxonomy + severity weighting.",
-      "Ambiguity detection tracked per 1k words.",
+      "Error taxonomy: Critical / Major / Minor with severity weighting",
+      "LQA threshold: ≥ 95 weighted score; trends tracked by content type",
+      "RCA/CAPA: root cause analysis + corrective + preventive actions",
+      "EN→IT risk: gendered titles + legal nuance flagged as high impact",
+      "EN→TR risk: agglutination + UI expansion managed via constraints",
     ],
   },
   5: {
-    title: "Exhibit V — Metrics Chamber",
-    note: "Evidence links language quality to business predictability.",
+    title: "V. Metrics Chamber",
+    note:
+      "What gets measured gets stabilized. What gets stabilized becomes scalable.",
     bullets: [
-      "OTD and TAT trend governance.",
-      "QA pass, rework, and risk closure view.",
-      "Monthly executive review cadence.",
+      "Dashboard: OTD, TAT, LQA pass, rework %, clarifications/1k, open risks",
+      "Business review narrative: what changed → why → action → expected impact",
+      "Profitability drivers: rework reduction + clarified scope + routing rules",
+      "Trend targets: clarifications/1k decreasing over 3 months",
+      "Escalations: thresholds defined (Red triggers immediate mitigation)",
     ],
   },
   6: {
-    title: "Exhibit VI — 30-60-90 Wing",
-    note: "Roadmap ambition is anchored in measurable outcomes.",
+    title: "VI. 30–60–90 Wing",
+    note:
+      "Fast adaptation is not luck. It’s structured learning + control mechanisms.",
     bullets: [
-      "30: baseline controls and KPIs.",
-      "60: quality gains and reduced rework.",
-      "90: controlled scaling and confidence.",
+      "30 days: baseline, glossary ownership, reporting cadence, vendor calibration",
+      "60 days: -20% clarification rate via better context + terminology workshops",
+      "90 days: predictive risk tracking + cost optimization without quality loss",
+      "Governance: standardize what must be consistent; keep flexibility where needed",
+      "Result: scalable enterprise delivery with measurable improvement loops",
     ],
   },
 };
 
-function showScene(key) {
-  Object.values(scenes).forEach((s) => s.classList.remove("is-active"));
-  scenes[key].classList.add("is-active");
+// ---------- Modal ----------
+const modal = $("#modal");
+const modalCard = $("#modal .modal-card");
+const closeModalBtn = $("#close-modal");
+const revealBtn = $("#reveal-btn");
+const modalTitle = $("#modal-title");
+const modalNote = $("#modal-note");
+const modalList = $("#modal-list");
+
+let currentFrameId = null;
+let revealed = false;
+
+function openModal(frameId) {
+  const data = FRAME_DATA[frameId];
+  if (!data) return;
+
+  currentFrameId = frameId;
+  revealed = false;
+
+  modalTitle.textContent = data.title;
+  modalNote.textContent = data.note;
+  modalList.innerHTML = "";
+  modalList.classList.remove("is-visible");
+  revealBtn.textContent = "Reveal";
+  revealBtn.disabled = false;
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+
+  // focus for accessibility
+  closeModalBtn.focus();
 }
 
-function wait(ms) {
-  return new Promise((r) => setTimeout(r, ms));
+function closeModal() {
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+  currentFrameId = null;
+  revealed = false;
 }
 
-async function typePromise() {
-  const text = "Human-centered, AI-integrated enterprise localization delivery";
-  promise.textContent = "";
-  for (const ch of text) {
-    promise.textContent += ch;
-    await wait(18 + Math.random() * 14);
+function revealContent() {
+  if (!currentFrameId) return;
+  const data = FRAME_DATA[currentFrameId];
+  if (!data) return;
+
+  if (!revealed) {
+    modalList.innerHTML = data.bullets.map((b) => `<li>${b}</li>`).join("");
+    modalList.classList.add("is-visible");
+    revealBtn.textContent = "Hide";
+    revealed = true;
+  } else {
+    modalList.classList.remove("is-visible");
+    modalList.innerHTML = "";
+    revealBtn.textContent = "Reveal";
+    revealed = false;
   }
 }
 
-enterBtn.addEventListener("click", async () => {
-  scenes.lobby.classList.add("open");
-  await wait(900);
-  showScene("ticket");
-  await wait(380);
-  stamp.classList.add("on");
+// Close: button
+closeModalBtn?.addEventListener("click", closeModal);
+
+// Close: click outside card
+modal?.addEventListener("click", (e) => {
+  if (!modalCard.contains(e.target)) closeModal();
 });
 
-presentBtn.addEventListener("click", async () => {
-  showScene("doors");
-  scenes.doors.classList.add("scan");
-  await wait(450);
-  scenes.doors.classList.add("open");
-  await wait(820);
-  showScene("gallery");
+// Close: ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
 });
 
-toExitBtn.addEventListener("click", () => showScene("exit"));
+// Reveal
+revealBtn?.addEventListener("click", revealContent);
 
-wall.addEventListener("mousemove", (e) => {
-  const r = wall.getBoundingClientRect();
-  wall.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
-  wall.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
-});
-
-frames.forEach((frame) => {
-  frame.addEventListener("click", () => {
-    const data = frameData[frame.dataset.frame];
-    modalTitle.textContent = data.title;
-    modalNote.textContent = `Curator Note: ${data.note}`;
-    modalList.innerHTML = data.bullets.map((b) => `<li>${b}</li>`).join("");
-    modalList.classList.remove("show");
-    modal.classList.add("is-open");
+// ---------- Gallery spotlight-follow ----------
+const wall = $("#gallery-wall");
+if (wall) {
+  wall.addEventListener("mousemove", (e) => {
+    const rect = wall.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    wall.style.setProperty("--mx", `${x}px`);
+    wall.style.setProperty("--my", `${y}px`);
   });
+  wall.addEventListener("mouseleave", () => {
+    wall.style.setProperty("--mx", `50%`);
+    wall.style.setProperty("--my", `40%`);
+  });
+}
+
+// Frames -> modal
+$$(".frame").forEach((f) => {
+  f.addEventListener("click", () => openModal(f.dataset.frame));
 });
 
-revealBtn.addEventListener("click", () => modalList.classList.add("show"));
-closeModalBtn.addEventListener("click", () => modal.classList.remove("is-open"));
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) modal.classList.remove("is-open");
-});
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") modal.classList.remove("is-open");
+// ---------- Scene flow ----------
+const promiseLine = $("#promise-line");
+typeOnce(promiseLine, "Human-centered, AI-integrated enterprise localization delivery", 18);
+
+// Lobby -> Ticket
+$("#enter-btn")?.addEventListener("click", () => {
+  const lobby = $("#scene-lobby");
+  lobby?.classList.add("exit");
+  setTimeout(() => showScene("scene-ticket"), 520);
 });
 
-typePromise();
+// Ticket animations
+const ticket = $("#ticket");
+const stamp = $("#stamp");
+
+function animateTicket() {
+  ticket?.classList.add("ticket-in");
+  // stamp after ticket settles
+  setTimeout(() => stamp?.classList.add("stamp-on"), 650);
+}
+
+$("#present-ticket")?.addEventListener("click", () => {
+  // stamp punch + move to doors
+  ticket?.classList.add("ticket-presented");
+  stamp?.classList.add("stamp-pulse");
+  setTimeout(() => showScene("scene-doors"), 700);
+
+  // doors auto-open after scan
+  setTimeout(() => {
+    $("#scene-doors")?.classList.add("scan");
+  }, 900);
+
+  setTimeout(() => {
+    $("#scene-doors")?.classList.add("open");
+  }, 1500);
+
+  setTimeout(() => {
+    showScene("scene-gallery");
+  }, 2150);
+});
+
+// When ticket scene becomes active, animate in (simple observer)
+const ticketScene = $("#scene-ticket");
+const observer = new MutationObserver(() => {
+  if (ticketScene.classList.contains("is-active")) {
+    // reset then animate in
+    ticket?.classList.remove("ticket-in", "ticket-presented");
+    stamp?.classList.remove("stamp-on", "stamp-pulse");
+    requestAnimationFrame(() => animateTicket());
+  }
+});
+if (ticketScene) observer.observe(ticketScene, { attributes: true, attributeFilter: ["class"] });
+
+// Gallery -> Exit
+$("#to-exit")?.addEventListener("click", () => {
+  $("#scene-gallery")?.classList.add("exit");
+  setTimeout(() => showScene("scene-exit"), 520);
+});
