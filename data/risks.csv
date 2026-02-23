@@ -1,0 +1,7 @@
+risk,probability,impact,mitigation,owner,status
+Terminology drift in rapid release notes,Medium,High,Weekly glossary delta sync + automated term QA,Localization PM,Open
+Inconsistent IT formality across channels,Medium,Medium,Channel-level formality profile and QA gate,Italian Lead Linguist,Open
+TR marketing tone too literal,Low,Medium,Creative-style calibration samples before launch,Turkish Lead Linguist,Monitoring
+Late legal clarifications for compliance copy,High,High,Blocker escalation SLA with legal owner,Client Compliance Owner,Open
+TM contamination from unreviewed legacy segments,Medium,High,Restrict retrieval to Reviewed/Approved states,QA Analyst,Mitigated
+Resource bottleneck during parallel launches,Medium,Medium,Backup linguist bench + dynamic workload balancing,Program Operations,Open
