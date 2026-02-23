@@ -287,36 +287,36 @@ $("#to-exit")?.addEventListener("click", () => {
 });
 
 // ---------- Nav arrows (Back/Forward) ----------
-const prevBtn = $("#nav-prev");
-const nextBtn = $("#nav-next");
-
-function getActiveSceneIndex() {
-  const activeId = scenes.find((id) => document.getElementById(id)?.classList.contains("is-active"));
-  return Math.max(0, scenes.indexOf(activeId));
+function getExistingScenes() {
+  return scenes.filter((id) => document.getElementById(id));
 }
 
-function updateNavArrows() {
+function getActiveSceneIndex(){
+  const list = getExistingScenes();
+  const activeId = list.find((id) => document.getElementById(id)?.classList.contains("is-active"));
+  return Math.max(0, list.indexOf(activeId));
+}
+
+function goToOffset(delta){
+  const list = getExistingScenes();
   const idx = getActiveSceneIndex();
-  if (prevBtn) prevBtn.classList.toggle("is-hidden", idx === 0);
-  if (nextBtn) nextBtn.classList.toggle("is-hidden", idx === scenes.length - 1);
-}
-
-function goToIndex(nextIndex) {
-  const clamped = Math.min(scenes.length - 1, Math.max(0, nextIndex));
-  const targetId = scenes[clamped];
-  if (!targetId) return;
+  const nextIdx = Math.min(list.length - 1, Math.max(0, idx + delta));
 
   // close modal if open
   if (modal?.classList.contains("is-open")) closeModal();
 
-  showScene(targetId);
-
+  showScene(list[nextIdx]);
   updateNavArrows();
 }
 
-prevBtn?.addEventListener("click", () => goToIndex(getActiveSceneIndex() - 1));
-nextBtn?.addEventListener("click", () => goToIndex(getActiveSceneIndex() + 1));
+function updateNavArrows(){
+  const list = getExistingScenes();
+  const idx = getActiveSceneIndex();
+  document.getElementById("nav-prev")?.classList.toggle("is-hidden", idx === 0);
+  document.getElementById("nav-next")?.classList.toggle("is-hidden", idx === list.length - 1);
+}
 
-// update arrows whenever scenes change (lightweight polling)
-setInterval(updateNavArrows, 250);
+document.getElementById("nav-prev")?.addEventListener("click", () => goToOffset(-1));
+document.getElementById("nav-next")?.addEventListener("click", () => goToOffset(1));
+
 updateNavArrows();

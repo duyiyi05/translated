@@ -370,6 +370,7 @@ body{
 #scene-gallery{
   flex-direction:column;
   justify-content:flex-start;
+  align-items:center;
   gap: 18px;
 }
 
@@ -396,6 +397,8 @@ body{
 }
 
 /* Dust */
+.dust{ pointer-events:none; }
+
 .dust::before{
   content:"";
   position:absolute;
