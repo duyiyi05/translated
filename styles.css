@@ -291,67 +291,6 @@ body{
   to{ transform: translateY(-6px); }
 }
 
-/* ---------- Doors ---------- */
-#scene-doors{
-  overflow:hidden;
-}
-
-.scan-line{
-  position:absolute;
-  left:0; right:0;
-  height:2px;
-  top:-10%;
-  opacity:.0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent);
-  filter: blur(.2px);
-}
-
-.doors{
-  position:relative;
-  width: min(980px, 100%);
-  height: min(540px, 70vh);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 22px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%, rgba(255,255,255,.10), transparent 55%),
-    rgba(255,255,255,.02);
-}
-
-.door{
-  position:absolute;
-  top:0; bottom:0;
-  width:50%;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-    radial-gradient(circle at 50% 40%, rgba(0,0,0,.0), rgba(0,0,0,.55));
-  border-right: 1px solid rgba(255,255,255,.10);
-}
-.door.left{ left:0; }
-.door.right{
-  right:0;
-  border-right:none;
-  border-left: 1px solid rgba(255,255,255,.10);
-}
-
-#scene-doors.scan .scan-line{
-  opacity:.65;
-  animation: scan 520ms var(--ease) both;
-}
-@keyframes scan{
-  from{ top:-10%; }
-  to{ top:110%; }
-}
-
-#scene-doors.open .door.left{
-  animation: doorLeft 720ms var(--ease) both;
-}
-#scene-doors.open .door.right{
-  animation: doorRight 720ms var(--ease) both;
-}
-@keyframes doorLeft{ to{ transform: translateX(-102%); } }
-@keyframes doorRight{ to{ transform: translateX(102%); } }
-
 /* ---------- About ---------- */
 .about-wrap{
   width: min(980px, 100%);
@@ -658,27 +597,7 @@ body{
   line-height: 1.4;
 }
 
-.ticket-desk{ position:relative; }
 
-.ticket-notes{
-  position: absolute;
-  width: min(900px, 100%);
-  pointer-events:none;
-}
 
-.note{
-  position:absolute;
-  max-width: 260px;
-  font-size: 12px;
-  opacity: .72;
-  letter-spacing: .04em;
-  line-height: 1.35;
-}
 
-.note-left{ left: -10px; top: 90px; transform: translateX(-100%); }
-.note-right{ right: -10px; top: 120px; transform: translateX(100%); text-align:left; }
-.note-bottom{ left: 50%; bottom: -6px; transform: translate(-50%, 100%); text-align:center; max-width: 420px; }
 
-@media (max-width: 900px){
-  .ticket-notes{ display:none; } /* hide on mobile to keep it clean */
-}

@@ -2,7 +2,7 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-const scenes = ["scene-lobby", "scene-ticket", "scene-doors", "scene-about", "scene-gallery", "scene-exit"];
+const scenes = ["scene-lobby", "scene-ticket", "scene-about", "scene-gallery", "scene-exit"];
 function showScene(id) {
   scenes.forEach((sid) => {
     const el = document.getElementById(sid);
@@ -238,12 +238,12 @@ function runLobbyTyping(force = false){
   [kicker,title,promise,subtitle,byline].forEach(resetTyped);
 
   typeSequence([
-    [kicker, "Welcome to", 22],
-    [title, "Symbiotic Enterprise Localization System", 14],
-    [promise, "Human-centered, AI-integrated enterprise localization delivery", 22],
-    [subtitle, "EN→TR | EN→IT", 20],
-    [byline, "by Duygu TAŞ", 20],
-  ], 220);
+    [kicker, "Welcome to", 45],
+    [title, "Symbiotic Enterprise Localization System", 28],
+    [promise, "Human-centered, AI-integrated enterprise localization delivery", 40],
+    [subtitle, "EN→TR | EN→IT", 36],
+    [byline, "by Duygu TAŞ", 36],
+  ], 420);
 }
 
 // Run on first load
@@ -275,23 +275,9 @@ function onSceneEnter(id) {
   }
 }
 
-$("#present-ticket")?.addEventListener("click", () => {
-  // ticket move to doors
+document.getElementById("present-ticket")?.addEventListener("click", () => {
   ticket?.classList.add("ticket-presented");
-  setTimeout(() => showScene("scene-doors"), 700);
-
-  // doors auto-open after scan
-  setTimeout(() => {
-    $("#scene-doors")?.classList.add("scan");
-  }, 900);
-
-  setTimeout(() => {
-    $("#scene-doors")?.classList.add("open");
-  }, 1500);
-
-  setTimeout(() => {
-    showScene("scene-about");
-  }, 2150);
+  setTimeout(() => showScene("scene-about"), 520);
 });
 
 // Gallery -> Exit
